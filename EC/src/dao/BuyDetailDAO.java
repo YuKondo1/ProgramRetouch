@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import base.DBManager;
@@ -51,7 +52,7 @@ public class BuyDetailDAO {
 	 * @return {BuyDataDetailBeans}
 	 * @throws SQLException
 	 */
-	public ArrayList<BuyDetailDataBeans> getBuyDataBeansListByBuyId(int buyId) throws SQLException {
+	public static ArrayList<BuyDetailDataBeans> getBuyDataBeansListByBuyId(int buyId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -131,4 +132,33 @@ public class BuyDetailDAO {
 		}
 	}
 
+	public static BuyDetailDataBeans getBuyId(int idP) {
+		Connection con = null;
+		Statement stmt = null;
+		try {
+			String sql = "SELECT * FROM t_buy_detail WHERE buy_id =" + idP;
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if (!rs.next()) {
+				return null;
+			}
+			BuyDetailDataBeans bddb = new BuyDetailDataBeans();
+			bddb.setId(rs.getInt("id"));
+			bddb.setBuyId(rs.getInt("buy_id"));
+			bddb.setItemId(rs.getInt("item_id"));
+			return bddb;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	return null;
+	}
 }
