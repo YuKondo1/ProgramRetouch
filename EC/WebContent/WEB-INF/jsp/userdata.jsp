@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +66,7 @@
 								<c:forEach var="bdb" items="${bdbList}" >
 								<tr>
 									<td class="center"><a href="UserBuyHistoryDetail?buy_id=${bdb.id}" class="btn-floating btn waves-effect waves-light "> <i class="material-icons">details</i></a></td>
-									<td class="center">${bdb.buyDate}</td>
+									<td class="center"><fmt:formatDate value="${bdb.buyDate}" pattern="yyyy年MM月dd日kk時mm分"/></td>
 									<td class="center">${bdb.deliveryMethodName}</td>
 									<td class="center">${bdb.totalPrice}円</td>
 								</tr>
